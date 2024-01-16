@@ -3,19 +3,16 @@ import styled from 'styled-components';
 
 const App = () => {
   const [boxLeft, setBoxLeft] = useState([
-    { item: "첫번째", left: "0%"},
-    { item: "두번째", left: "0%"},
+    { item: "1", left: "0%"},
+    { item: "2", left: "0%"},
   ]);
 
   const handleClickBox = (idx) => {
     setBoxLeft(prevBoxLeft => {
       const updatedBoxLeft = [...prevBoxLeft];
       if (updatedBoxLeft[idx].left === "100%") {
-        console.log(idx, boxLeft);
-        console.log("==================");
         updatedBoxLeft[idx].left = '0%';
-      }
-      if (updatedBoxLeft[idx].left === "0%") {
+      } else {
         updatedBoxLeft[idx].left = '100%';
       }
       return updatedBoxLeft;
@@ -28,9 +25,16 @@ const App = () => {
       <LeftSide>
         {
           boxLeft.map((value, idx) => {
-            return <LeftBox box={value.left} onClick={() => handleClickBox(idx)} key={idx}>{value.item}</LeftBox>
+            return <LeftBox idx={idx + 1} box={value.left} onClick={() => handleClickBox(idx)} key={idx}>{value.item}</LeftBox>
           })
         }
+        <CheckBoxWrap>                                                                                                          
+          <CheckInput type="checkbox" id="check" name="check"/>
+          <CheckLabel for="check">check</CheckLabel>
+          <br />
+          <CheckInput type="checkbox" id="check2" name="check2"/>
+          <CheckLabel for="check2">check</CheckLabel>
+        </CheckBoxWrap>
       </LeftSide>
       <RightSide>
       </RightSide>
@@ -43,7 +47,6 @@ const Contain = styled.div`
 `;
 
 const LeftSide = styled.div`
-  background-color: ivory;
   width: 50%;
   height: 100vh;
   & div {
@@ -56,17 +59,55 @@ const LeftSide = styled.div`
   }
 `;
 
+const CheckBoxWrap = styled.section`
+`;
+
 const LeftBox = styled.div`
   left: ${(props) => {
-    console.log(props);
     return props.box;
   }};
+  top: ${(props) => {
+    return 7 * props.idx;
+  }}; vh
 `;
 
 const RightSide = styled.div`
-  background-color: skyblue;
   width: 50%;
   height: 100vh;
 `;
+
+const CheckInput = styled.input`
+  appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: .5px solid #11264f;
+  border-radius: 0.35rem;
+  position: relative;
+  padding: 1px;
+  background: rgb(68, 84, 167);
+  background: radial-gradient(circle, rgba(68, 84, 167, 1) 0%, rgba(174, 178, 227, 1) 100%);
+  background-clip: content-box;
+
+  &:checked {
+    &::before {
+      content: '\\2713';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1rem;
+    }
+  }
+`;
+
+const CheckLabel = styled.label`
+  position: relative;
+  top: -10px;
+  left: 3px;
+  border-bottom: 1px solid gray;
+`;
+
 
 export default App;
