@@ -16,7 +16,6 @@ const App = () => {
       } else {
         updatedBoxLeft[idx].left = '0%';
       }
-  
       return updatedBoxLeft;
     });
   };
@@ -31,10 +30,10 @@ const App = () => {
         }
         <CheckBoxWrap>                                                                                                          
           <CheckInput type="checkbox" id="check" name="check"/>
-          <CheckLabel for="check">check</CheckLabel>
+          <CheckLabel htmlFor="check">check</CheckLabel>
           <br />
           <CheckInput type="checkbox" id="check2" name="check2"/>
-          <CheckLabel for="check2">check</CheckLabel>
+          <CheckLabel htmlFor="check2">check</CheckLabel>
         </CheckBoxWrap>
       </LeftSide>
       <RightSide>
@@ -51,9 +50,8 @@ const LeftSide = styled.div`
   width: 50%;
   height: 100vh;
   & div {
-    border: 1px solid black;
     height: 7vh;
-    margin: 1%;
+    margin: 7%;
     cursor: pointer;
     position: relative;
     transition: left 2s, transform 2s;
@@ -67,9 +65,8 @@ const LeftBox = styled.div`
   left: ${(props) => {
     return props.box;
   }};
-  top: ${(props) => {
-    return 7 * props.idx;
-  }}; vh
+  background-color: rgb(2, 211, 248);
+  clip-path: polygon(34% 0, 46% 9%, 100% 9%, 100% 78%, 0 78%, 0 28%, 0 0);
 `;
 
 const RightSide = styled.div`
