@@ -21,11 +21,6 @@ const App = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("boxLeft changed:", boxLeft);
-  }, [boxLeft])
-  
-
   return (
     <Contain>
       <LeftSide>
