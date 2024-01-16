@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const App = () => {
   const [boxLeft, setBoxLeft] = useState([
-    { item: "1", left: "0%"},
-    { item: "2", left: "0%"},
+    { item: "1번째", left: "0%"},
+    { item: "2번째", left: "0%"},
   ]);
 
   const handleClickBox = (idx) => {
-    setBoxLeft(prevBoxLeft => {
-      const updatedBoxLeft = [...prevBoxLeft];
-      if (updatedBoxLeft[idx].left === "100%") {
-        updatedBoxLeft[idx].left = '0%';
-      } else {
+    setBoxLeft((prevBoxLeft) => {
+      const updatedBoxLeft = JSON.parse(JSON.stringify(prevBoxLeft));
+  
+      if (updatedBoxLeft[idx].left === "0%") {
         updatedBoxLeft[idx].left = '100%';
+      } else {
+        updatedBoxLeft[idx].left = '0%';
       }
+  
       return updatedBoxLeft;
     });
-  } 
+  };
+
+  useEffect(() => {
+    console.log("boxLeft changed:", boxLeft);
+  }, [boxLeft])
   
 
   return (
@@ -108,6 +114,5 @@ const CheckLabel = styled.label`
   left: 3px;
   border-bottom: 1px solid gray;
 `;
-
 
 export default App;
